@@ -10,7 +10,7 @@ const addProduct =()=>{
         const quantity = getInputValueById( 'product-quantity');
         console.log(product,quantity);
         //display product
-        displayProduct(product,quantity);
+        addProductToDisplay(product,quantity);
         //set to localstorage
         //simple way
         // localStorage.setItem(product,quantity);
@@ -38,9 +38,19 @@ const saveItemOnLocalStorage =(product,quantity)=>{
 
     }
 
-const displayProduct =(product,quantity)=>{
+const addProductToDisplay =(product,quantity)=>{
         const productContainer =document.getElementById('product-container');
         const li = document.createElement('li');
         li.innerText =`${product}:${quantity}`;
         productContainer.appendChild(li);
 }
+const displayStoredProducts =()=>{
+
+    const cart = getShoppingCartFromLocalStorage();
+    for(const product in cart )
+    {
+        const quantity = cart[product];
+        addProductToDisplay(product,quantity);
+    }
+}
+displayStoredProducts();
